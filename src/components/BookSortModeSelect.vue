@@ -11,7 +11,6 @@
 import { useModel } from '@/composables/useModel'
 
 const modes = [
-  { title: '', value: 'default' },
   { title: 'по названию', value: 'title' },
   { title: 'по году', value: 'year' },
 ]
