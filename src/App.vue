@@ -1,30 +1,28 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <PageHeader>
+    <router-link to="/books">Каталог</router-link>
+    <router-link to="/books/create">Добавить книгу</router-link>
+  </PageHeader>
+  <router-view />
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import { onMounted } from 'vue'
+import { useStore } from 'vuex'
 
-nav {
-  padding: 30px;
-}
+import PageHeader from '@/components/PageHeader'
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+export default {
+  name: 'App',
 
-nav a.router-link-exact-active {
-  color: #42b983;
+  components: {
+    PageHeader,
+  },
+
+  setup() {
+    const store = useStore()
+
+    onMounted(() => store.dispatch('books/getAllBooks'))
+  },
 }
-</style>
+</script>

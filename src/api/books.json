@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "title": "Гарри Поттер и философский камень",
+    "authorFirstName": "Джоан",
+    "authorLastName": "Роулинг",
+    "pageCount": 432,
+    "publisherName": "Махаон",
+    "publishingYear": 2017,
+    "releaseDate": null
+  },
+  {
+    "id": 2,
+    "title": "Чарли и шоколадная фабрика",
+    "authorFirstName": "Роальд",
+    "authorLastName": "Даль",
+    "pageCount": 174,
+    "publisherName": "Росмэн",
+    "publishingYear": 2005,
+    "releaseDate": null
+  },
+  {
+    "id": 3,
+    "title": "Алиса в стране чудес",
+    "authorFirstName": "Льюис",
+    "authorLastName": "Кэрролл",
+    "pageCount": 110,
+    "publisherName": "Лабиринт",
+    "publishingYear": 2018,
+    "releaseDate": null
+  }
+]
