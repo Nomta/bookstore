@@ -12,7 +12,7 @@ const getters = {
       case 'title':
         return cloneDeep(state.books).sort((a, b) => a.title.localeCompare(b.title))
       case 'year':
-        return cloneDeep(state.books).sort((a, b) => a.publishingYear - b.publishingYear)
+        return cloneDeep(state.books).sort((a, b) => b.publishingYear - a.publishingYear)
       default: return state.books
     }
   },

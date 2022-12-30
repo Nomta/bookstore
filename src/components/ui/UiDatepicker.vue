@@ -1,6 +1,6 @@
 <template>
   <Datepicker v-model="date" :locale="locale" :year-range="years" :min-date="minDate" :max-date="maxDate"
-    :format="format" text-input>
+    :format="format" selectText="Выбрать" cancelText="">
     <template #dp-input="{ value }">
       <VTextField :label="label" :model-value="value" :rules="rules" validate-on="blur" />
     </template>
@@ -36,11 +36,11 @@ export default {
 
   emits: ['update:model-value'],
 
-  setup(props, { emit }) {
+  setup(props, ctx) {
 
     const minDate = ref(null)
     const maxDate = ref(null)
-    const date = useModel(props, emit)
+    const date = useModel(props, ctx)
 
     const rules = []
 

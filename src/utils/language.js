@@ -1,5 +1,4 @@
-import { config } from "@/config";
-
+import { config } from '@/config'
 
 export const defineUserLanguage = () => {
   const language = window.navigator && (
