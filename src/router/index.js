@@ -9,12 +9,12 @@ const routes = [
   {
     path: '/books',
     name: 'books',
-    component: () => import(/* webpackChunkName: "Books" */ '@/views/BooksView.vue')
+    component: () => import(/* webpackChunkName: "Books" */ '@/views/BooksView.vue'),
   },
   {
     path: '/books/create',
     name: 'createBook',
-    component: () => import(/* webpackChunkName: "Books" */ '@/views/BookEditorView.vue')
+    component: () => import(/* webpackChunkName: "Books" */ '@/views/BookEditorView.vue'),
   },
   {
     path: '/books/:id',
@@ -31,13 +31,13 @@ const routes = [
   {
     path: '/:pathMatch(.*)*',
     name: 'notFound',
-    component: () => import(/* webpackChunkName: "NotFound" */ '@/views/NotFound.vue')
+    component: () => import(/* webpackChunkName: "NotFound" */ '@/views/NotFound.vue'),
   },
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
 })
 
 export default router

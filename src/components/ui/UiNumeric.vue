@@ -14,7 +14,7 @@ export default {
   name: 'UiNumeric',
 
   props: {
-    modelValue: Date,
+    modelValue: Number,
     required: Boolean,
     min: Number,
     max: Number,

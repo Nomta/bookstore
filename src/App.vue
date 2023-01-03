@@ -1,7 +1,7 @@
 <template>
   <PageHeader>
-    <router-link to="/books">Каталог</router-link>
-    <router-link to="/books/create">Добавить книгу</router-link>
+    <router-link :to="{ name: 'books' }">Каталог</router-link>
+    <router-link :to="{ name: 'createBook' }">Добавить книгу</router-link>
   </PageHeader>
   <router-view />
 </template>

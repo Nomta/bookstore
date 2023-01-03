@@ -1,22 +1,9 @@
-import { computed, toRef } from 'vue'
-import { getUId } from '@/utils/common'
+import { computed } from 'vue'
+import { cloneDeep } from 'lodash'
 
-export const useModel = (props, { emit }) => {
-  const modelValue = toRef(props, 'modelValue')
-
+export const useModel = (props, { emit }, propName = 'modelValue') => {
   return computed({
-    get: () => modelValue.value,
-    set: (value) => emit('update:modelValue', value)
-  })
-}
-
-export const useBookModel = (props, { getters, commit }) => {
-  const id = toRef(props, 'id')
-
-  return computed({
-    get: () => id.value
-      ? getters['books/getBookById'](id.value)
-      : { id: getUId() },
-    set: (value) => commit('books/setBook', value),
+    get: () => cloneDeep(props[propName]),
+    set: (value) => emit(`update:${propName}`, value)
   })
 }

@@ -1,5 +1,6 @@
 import { cloneDeep } from 'lodash'
 import { getBooks } from '@/api'
+import { mapBooks } from '@/mappers/mapBooks'
 
 const state = {
   books: [],
@@ -29,7 +30,7 @@ const getters = {
 const actions = {
   async getAllBooks({ commit }) {
     const books = await getBooks()
-    commit('setAllBooks', books)
+    commit('setAllBooks', mapBooks(books))
   }
 }
 

@@ -2,41 +2,41 @@
   <VCard class="pa-5 pb-3">
     <VRow>
       <VCol cols="3">
-        <VImg v-if="image" :src="image" />
+        <VImg v-if="book.image" :src="book.image" />
         <VImg v-else src="@/assets/images/book-default.svg" class="default-image" />
       </VCol>
       <VCol class="text-left">
         <VCardTitle>
-          {{ title }}
+          {{ book.title }}
         </VCardTitle>
         <VTable>
           <tbody>
             <tr>
               <td>Автор</td>
-              <td>{{ authorFirstName }} {{ authorLastName }}</td>
+              <td>{{ book.authorFirstName }} {{ book.authorLastName }}</td>
             </tr>
             <tr>
               <td>Количество страниц</td>
-              <td>{{ pageCount }}</td>
+              <td>{{ book.pageCount }}</td>
             </tr>
-            <tr v-if="publisherName">
+            <tr v-if="book.publisherName">
               <td>Издательство</td>
-              <td>{{ publisherName }}</td>
+              <td>{{ book.publisherName }}</td>
             </tr>
-            <tr v-if="publishingYear">
+            <tr v-if="book.publishingYear">
               <td>Год издания</td>
-              <td>{{ publishingYear }}</td>
+              <td>{{ book.publishingYear }}</td>
             </tr>
-            <tr v-if="releaseDate">
+            <tr v-if="book.releaseDate">
               <td>Дата выхода в тираж</td>
-              <td>{{ formatDate(releaseDate) }}</td>
+              <td>{{ formatDate(book.releaseDate) }}</td>
             </tr>
           </tbody>
         </VTable>
       </VCol>
     </VRow>
     <VCardActions v-if="detailId" class="actions d-flex justify-end">
-      <RouterLink :to="`${detailId}/edit`">
+      <RouterLink :to="{ name: 'editBook', params: { id: detailId } }">
         <VBtn color="secondary">
           Редактировать
         </VBtn>
@@ -49,7 +49,6 @@
 </template>
 
 <script>
-import { toRef, toRefs } from 'vue'
 import { formatDate } from '@/utils/DateParser'
 
 export default {
@@ -66,16 +65,12 @@ export default {
   emits: ['remove'],
 
   setup(props, { emit }) {
-    const detailId = toRef(props, 'detailId')
-
     const removeBook = () => {
-      emit('remove', detailId.value)
+      emit('remove', props.detailId)
     }
     return {
-      detailId,
       formatDate,
       removeBook,
-      ...toRefs(props.book)
     }
   }
 }

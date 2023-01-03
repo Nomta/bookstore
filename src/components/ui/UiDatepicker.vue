@@ -69,8 +69,6 @@ export default {
     const locale = defineUserLanguage()
 
     return {
-      minDate,
-      maxDate,
       date,
       years,
       locale,
