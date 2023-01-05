@@ -1,4 +1,4 @@
-import { cloneDeep } from 'lodash'
+import { cloneDeep, isNil } from 'lodash'
 import { getBooks } from '@/api'
 import { mapBooks } from '@/mappers/mapBooks'
 
@@ -24,7 +24,15 @@ const getters = {
 
   getIndex: (state) => (id) => {
     return state.books.findIndex((book) => String(book.id) === id)
-  }
+  },
+
+  getPrevBookId: (state, getters) => (id) => {
+    return state.books[getters.getIndex(id) - 1]?.id
+  },
+
+  getNextBookId: (state, getters) => (id) => {
+    return state.books[getters.getIndex(id) + 1]?.id
+  },
 }
 
 const actions = {
