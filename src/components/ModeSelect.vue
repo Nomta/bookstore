@@ -1,6 +1,6 @@
 <template>
   <VRow align="center">
-    <VCol class="d-none d-sm-block text-right">Сортировать</VCol>
+    <VCol class="d-none d-sm-block text-right">{{ label }}</VCol>
     <VCol>
       <VSelect v-model="mode" :items="modes" />
     </VCol>
@@ -10,24 +10,21 @@
 <script>
 import { useModel } from '@/composables/useModel'
 
-const modes = [
-  { title: 'по названию', value: 'title' },
-  { title: 'по году', value: 'year' },
-]
-
 export default {
-  name: 'BookSortModeSelect',
+  name: 'ModeSelect',
 
   props: {
     modelValue: String,
+    label: String,
+    modes: {
+      type: Array,
+      required: true
+    }
   },
 
   setup(props, ctx) {
-    const mode = useModel(props, ctx)
-
     return {
-      modes,
-      mode
+      mode: useModel(props, ctx)
     }
   }
 }

@@ -4,7 +4,7 @@ import { mapBooks } from '@/mappers/mapBooks'
 
 const state = {
   books: [],
-  mode: ''
+  mode: 'title'
 }
 
 const getters = {

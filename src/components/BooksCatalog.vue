@@ -1,8 +1,11 @@
 <template>
   <VApp>
     <VContainer>
-      <BookSortModeSelect v-model="mode" />
-      <BookList :books="books" />
+      <template v-if="books.length">
+        <ModeSelect v-model="mode" :modes="modes" :label="Сортировать" />
+        <BookList :books="books" />
+      </template>
+      <template v-else>Здесь пока нет книг...</template>
     </VContainer>
   </VApp>
 </template>
@@ -12,14 +15,19 @@ import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 import BookList from '@/components/BookList'
-import BookSortModeSelect from '@/components/BookSortModeSelect'
+import ModeSelect from '@/components/ModeSelect'
+
+const modes = [
+  { title: 'по названию', value: 'title' },
+  { title: 'по году', value: 'year' },
+]
 
 export default {
   name: 'BooksCatalog',
 
   components: {
     BookList,
-    BookSortModeSelect,
+    ModeSelect,
   },
 
   setup() {
@@ -34,6 +42,7 @@ export default {
 
     return {
       books,
+      modes,
       mode,
     }
   }
