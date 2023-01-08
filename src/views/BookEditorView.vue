@@ -8,12 +8,11 @@
 
 <script>
 import { ref } from 'vue'
-import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import { config } from '@/config'
 import { getUId } from '@/utils/common'
 import { useWatchEffect } from '@/composables/useWatchEffect'
-
+import { getBook, createBook, updateBook } from '@/store/modules/books/actionCreators'
 import BookEditor from '@/components/BookEditor.vue'
 
 const { minYear, dateFormat } = config
@@ -33,22 +32,18 @@ export default {
   },
 
   setup(props) {
-    const store = useStore()
     const router = useRouter()
     const book = ref({})
-
-    const getBook = (id) => store.getters['books/getBookById'](id)
-    const updateBook = (value) => store.commit('books/setBook', value)
     const useEffect = useWatchEffect(props, 'id')
 
     const handleUpdateBook = (book) => {
-      updateBook(book)
+      (props.id ? updateBook : createBook)(book)
       router.push({ name: 'book', params: { id: book.id } })
     }
 
     useEffect(() => {
       if (props.id) {
-        book.value = getBook(props.id)
+        book.value = getBook()
 
         if (!book.value) {
           router.replace({ name: 'notFound' })

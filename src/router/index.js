@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { requireDetail } from './guards'
 
 const routes = [
   {
@@ -21,12 +22,14 @@ const routes = [
     name: 'book',
     component: () => import(/* webpackChunkName: "BookDetail" */ '@/views/BookDetailView.vue'),
     props: true,
+    meta: { detail: true },
   },
   {
     path: '/books/:id/edit',
     name: 'editBook',
     component: () => import(/* webpackChunkName: "BookDetail" */ '@/views/BookEditorView.vue'),
     props: true,
+    meta: { detail: true },
   },
   {
     path: '/:pathMatch(.*)*',
@@ -39,5 +42,7 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 })
+
+router.beforeEach(requireDetail)
 
 export default router

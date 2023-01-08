@@ -7,9 +7,7 @@
 </template>
 
 <script>
-import { onMounted } from 'vue'
-import { useStore } from 'vuex'
-
+import { useInitialStore } from '@/composables/useInitialStore'
 import PageHeader from '@/components/PageHeader'
 
 export default {
@@ -20,9 +18,7 @@ export default {
   },
 
   setup() {
-    const store = useStore()
-
-    onMounted(() => store.dispatch('books/getAllBooks'))
+    useInitialStore()
   },
 }
 </script>

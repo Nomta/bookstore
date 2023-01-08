@@ -12,10 +12,11 @@
 
 <script>
 import { computed } from 'vue'
-import { useStore } from 'vuex'
 
 import BookList from '@/components/BookList'
 import ModeSelect from '@/components/ModeSelect'
+import { getMode, setMode } from '@/store/modules/localSettings/actionCreators'
+import { getSortedBooks } from '@/store/modules/books/actionCreators'
 
 const modes = [
   { title: 'по названию', value: 'title' },
@@ -31,14 +32,12 @@ export default {
   },
 
   setup() {
-    const store = useStore()
-
     const mode = computed({
-      get: () => store.state.books.mode,
-      set: (value) => store.commit('books/setMode', value),
+      get: getMode,
+      set: setMode,
     })
 
-    const books = computed(() => store.getters['books/getSortedBooks'](mode.value))
+    const books = computed(getSortedBooks)
 
     return {
       books,

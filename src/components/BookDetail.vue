@@ -35,8 +35,8 @@
         </VTable>
       </VCol>
     </VRow>
-    <VCardActions v-if="detailId" class="actions d-flex justify-end">
-      <RouterLink :to="{ name: 'editBook', params: { id: detailId } }">
+    <VCardActions v-if="edit" class="actions d-flex justify-end">
+      <RouterLink v-if="book.id" :to="{ name: 'editBook', params: { id: book.id } }">
         <VBtn color="secondary">
           Редактировать
         </VBtn>
@@ -59,14 +59,14 @@ export default {
       type: Object,
       required: true
     },
-    detailId: [Number, String],
+    edit: Boolean,
   },
 
   emits: ['remove'],
 
   setup(props, { emit }) {
     const removeBook = () => {
-      emit('remove', props.detailId)
+      emit('remove', props.book.id)
     }
     return {
       formatDate,

@@ -4,29 +4,19 @@
 
 <script>
 import { computed } from 'vue'
-import { useStore } from 'vuex'
-
+import { getPrevBookId, getNextBookId } from '@/store/modules/books/actionCreators'
 import UiDetailNav from '@/components/ui/UiDetailNav'
 
 export default {
   name: 'BookDetailNav',
 
-  props: {
-    detailId: {
-      type: [Number, String],
-      required: true
-    },
-  },
-
   components: {
     UiDetailNav,
   },
 
-  setup(props) {
-    const store = useStore()
-
-    const prevBookId = computed(() => store.getters['books/getPrevBookId'](props.detailId))
-    const nextBookId = computed(() => store.getters['books/getNextBookId'](props.detailId))
+  setup() {
+    const prevBookId = computed(getPrevBookId)
+    const nextBookId = computed(getNextBookId)
 
     const links = computed(() => [
       prevBookId.value && { name: 'book', params: { id: prevBookId.value } },

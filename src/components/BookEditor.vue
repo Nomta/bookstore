@@ -34,8 +34,8 @@
       <VCol cols="12" sm="9" md="5">
         <UiImageUploader v-model="book.image" label="Загрузить изображение" :preview="true" />
       </VCol>
-      <VCol align-self="center">
-        <VBtn type="submit" color="secondary" class="mb-1 float-right">Сохранить</VBtn>
+      <VCol align-self="center" class="d-flex justify-end pb-1">
+        <VBtn type="submit" color="secondary" class="ml-2 mb-1">Сохранить</VBtn>
       </VCol>
     </VRow>
 
@@ -44,7 +44,6 @@
 
 <script>
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
 import { cloneDeep } from 'lodash'
 import UiTextField from '@/components/ui/UiTextField'
 import UiDatepicker from '@/components/ui/UiDatepicker'
@@ -68,13 +67,12 @@ export default {
       default: {}
     },
     minYear: Number,
-    dateFormat: String
+    dateFormat: String,
   },
 
   emits: ['update:book'],
 
   setup(props, { emit }) {
-    const router = useRouter()
     const book = ref({})
     const form = ref(null)
 
@@ -84,12 +82,11 @@ export default {
       book.value = cloneDeep(props.book)
     })
 
-    async function handleSubmit() {
+    const handleSubmit = async () => {
       const isValid = await form.value.validate()
 
       if (isValid.valid) {
         emit('update:book', book.value)
-        router.push({ name: 'book', params: { id: book.value.id } })
       }
     }
 
@@ -101,8 +98,8 @@ export default {
       book,
       handleSubmit,
       minDate,
-      currentDate
-    };
+      currentDate,
+    }
   }
-};
+}
 </script>
