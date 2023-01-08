@@ -1,9 +1,5 @@
 <template>
-  <VApp class="book">
-    <VContainer>
-      <BookEditor :book="book" @update:book="handleUpdateBook" :min-year="minYear" :date-format="dateFormat" />
-    </VContainer>
-  </VApp>
+  <BookEditor :book="book" @update:book="handleUpdateBook" :min-year="minYear" :date-format="dateFormat" />
 </template>
 
 <script>

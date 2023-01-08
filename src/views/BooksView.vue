@@ -1,9 +1,5 @@
 <template>
-  <VApp>
-    <VContainer>
-      <BooksCatalog />
-    </VContainer>
-  </VApp>
+  <BooksCatalog />
 </template>
 
 <script>

@@ -1,10 +1,6 @@
 <template>
-  <VApp class="book">
-    <VContainer>
-      <BookDetail v-if="book" :book="book" :edit="true" @remove="handleRemoveBook" />
-    </VContainer>
-    <BookDetailNav />
-  </VApp>
+  <BookDetail v-if="book" :book="book" :edit="true" @remove="handleRemoveBook" />
+  <BookDetailNav />
 </template>
 
 <script>

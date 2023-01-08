@@ -36,7 +36,7 @@
       </VCol>
     </VRow>
     <VCardActions v-if="edit" class="actions d-flex justify-end">
-      <RouterLink v-if="book.id" :to="{ name: 'editBook', params: { id: book.id } }">
+      <RouterLink :to="{ name: 'editBook', params: { id: book.id } }">
         <VBtn color="secondary">
           Редактировать
         </VBtn>
