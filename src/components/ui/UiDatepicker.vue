@@ -1,8 +1,8 @@
 <template>
   <Datepicker v-model="date" :locale="locale" :year-range="years" :min-date="minDate" :max-date="maxDate"
-    :format="format" selectText="Выбрать" cancelText="">
+    :format="format" auto-apply>
     <template #dp-input="{ value }">
-      <VTextField :label="label" :model-value="value" :rules="rules" validate-on="blur" />
+      <VTextField :label="label" :model-value="value" :rules="rules" validate-on="blur" readonly />
     </template>
   </Datepicker>
 </template>

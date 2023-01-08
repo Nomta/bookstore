@@ -7,7 +7,9 @@ export const parseDate = (dateStr, pattern) => {
   return new Date(dateStr)
 }
 
-export const formatDate = (date) => {
+export const formatDate = (dateStr) => {
+  const date = new Date(dateStr)
+
   if (isValid(date)) {
     return date.toLocaleDateString()
   }
