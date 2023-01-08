@@ -40,7 +40,7 @@ export default {
       book.value = getBook()
 
       if (!book.value) {
-        router.replace({ name: 'notFound' })
+        router.back()
       }
     })
 
