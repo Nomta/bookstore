@@ -3,12 +3,19 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
+import { cloneDeep } from 'lodash'
+
 import { config } from '@/config'
 import { getUId } from '@/utils/common'
-import { useWatchEffect } from '@/composables/useWatchEffect'
-import { getBook, createBook, updateBook } from '@/store/modules/books/actionCreators'
+
+import {
+  getBook,
+  createBook,
+  updateBook
+} from '@/store/modules/books/actionCreators'
+
 import BookEditor from '@/components/BookEditor.vue'
 
 const { minYear, dateFormat } = config
@@ -22,7 +29,7 @@ export default {
 
   props: {
     id: {
-      type: [Number, String],
+      type: String,
       required: true
     },
   },
@@ -30,16 +37,15 @@ export default {
   setup(props) {
     const router = useRouter()
     const book = ref({})
-    const useEffect = useWatchEffect(props, 'id')
 
     const handleUpdateBook = (book) => {
       (props.id ? updateBook : createBook)(book)
       router.push({ name: 'book', params: { id: book.id } })
     }
 
-    useEffect(() => {
+    watch(() => props.id, () => {
       if (props.id) {
-        book.value = getBook()
+        book.value = cloneDeep(getBook())
 
         if (!book.value) {
           router.replace({ name: 'notFound' })
@@ -48,7 +54,7 @@ export default {
       else {
         book.value = { id: getUId() }
       }
-    })
+    }, { immediate: true })
 
     return { book, handleUpdateBook, minYear, dateFormat }
   }

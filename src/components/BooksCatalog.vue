@@ -12,11 +12,11 @@
 
 <script>
 import { computed } from 'vue'
+import { getMode, setMode } from '@/store/modules/localSettings/actionCreators'
+import { getSortedBooks } from '@/store/modules/books/actionCreators'
 
 import BookList from '@/components/BookList'
 import ModeSelect from '@/components/ModeSelect'
-import { getMode, setMode } from '@/store/modules/localSettings/actionCreators'
-import { getSortedBooks } from '@/store/modules/books/actionCreators'
 
 const modes = [
   { title: 'по названию', value: 'title' },

@@ -4,12 +4,13 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
-import { useWatchEffect } from '@/composables/useWatchEffect'
+import { cloneDeep } from 'lodash'
+import { getBook, removeBook } from '@/store/modules/books/actionCreators'
+
 import BookDetail from '@/components/BookDetail'
 import BookDetailNav from '@/components/BookDetailNav'
-import { getBook, removeBook } from '@/store/modules/books/actionCreators'
 
 export default {
   name: 'BookDetailView',
@@ -21,7 +22,7 @@ export default {
 
   props: {
     id: {
-      type: [Number, String],
+      type: String,
       required: true
     },
   },
@@ -29,20 +30,19 @@ export default {
   setup(props) {
     const router = useRouter()
     const book = ref({})
-    const useEffect = useWatchEffect(props, 'id')
 
     const handleRemoveBook = (id) => {
       removeBook(id)
-      router.push({ name: 'books' })
+      router.back()
     }
 
-    useEffect(() => {
-      book.value = getBook()
+    watch(() => props.id, () => {
+      book.value = cloneDeep(getBook())
 
       if (!book.value) {
         router.replace({ name: 'notFound' })
       }
-    })
+    }, { immediate: true })
 
     return {
       book,

@@ -6,6 +6,7 @@
 
 <script>
 export default {
+  name: 'NotFound',
 
 }
 </script>
@@ -14,7 +15,6 @@ export default {
 .not-found {
   padding-top: 25vh;
   font-size: 2.5rem;
-  display: flex;
-  justify-content: center;
+  text-align: center;
 }
 </style>
