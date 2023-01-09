@@ -34,8 +34,9 @@
       <VCol cols="12" sm="9" md="5">
         <UiImageUploader v-model="book.image" label="Загрузить изображение" :preview="true" />
       </VCol>
-      <VCol align-self="center" class="d-flex justify-end pb-1">
-        <VBtn type="submit" color="secondary" class="ml-2 mb-1">Сохранить</VBtn>
+      <VCol align-self="center" class="d-flex justify-end">
+        <VBtn type="button" color="warning" class="ml-2 mb-1" @click="handleReset">Сбросить</VBtn>
+        <VBtn type="submit" color="info" class="ml-2 mb-1">Сохранить</VBtn>
       </VCol>
     </VRow>
 
@@ -43,13 +44,13 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { cloneDeep } from 'lodash'
+
 import UiTextField from '@/components/ui/UiTextField'
 import UiDatepicker from '@/components/ui/UiDatepicker'
 import UiImageUploader from '@/components/ui/UiImageUploader'
 import UiNumeric from '@/components/ui/UiNumeric'
-import { useWatchEffect } from '@/composables/useWatchEffect'
 
 export default {
   name: 'BookEditor',
@@ -76,11 +77,13 @@ export default {
     const book = ref({})
     const form = ref(null)
 
-    const useEffect = useWatchEffect(props, 'book')
-
-    useEffect(() => {
+    watch(() => props.book, () => {
       book.value = cloneDeep(props.book)
-    })
+    }, { immediate: true })
+
+    const handleReset = () => {
+      book.value = cloneDeep(props.book)
+    }
 
     const handleSubmit = async () => {
       const isValid = await form.value.validate()
@@ -97,6 +100,7 @@ export default {
       form,
       book,
       handleSubmit,
+      handleReset,
       minDate,
       currentDate,
     }
